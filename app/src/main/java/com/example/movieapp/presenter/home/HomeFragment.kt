@@ -14,10 +14,10 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
+    private var binding: FragmentHomeBinding? = null
 
     private val homeViewModel : HomeViewModel by viewModel()
-    private lateinit var adapter: MovieAdapter
+    private var adapter: MovieAdapter? = null
 
     companion object{
         const val EXTRA_MOVIE = "extra_movie"
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
 
         showRecycleView()
 
-        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
+        adapter?.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Int) {
                 val bundle = Bundle()
                 bundle.putInt(EXTRA_MOVIE, data)
@@ -63,7 +63,7 @@ class HomeFragment : Fragment() {
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     homeViewModel.searchMovie(query).observe(viewLifecycleOwner, {
-                        adapter.setMovie(it)
+                        adapter?.setMovie(it)
                     })
                     searchView.clearFocus()
                     return true
@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
 
                 override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
                     homeViewModel.getMovies().observe(viewLifecycleOwner, {
-                        adapter.setMovie(it)
+                        adapter?.setMovie(it)
                     })
                     return true
                 }
@@ -97,15 +97,21 @@ class HomeFragment : Fragment() {
         }
 
     private fun showRecycleView() {
-        binding.rvMovieList.layoutManager = LinearLayoutManager(activity)
-        binding.rvMovieList.setHasFixedSize(true)
+        binding?.rvMovieList?.layoutManager = LinearLayoutManager(activity)
+        binding?.rvMovieList?.setHasFixedSize(true)
 
         adapter = MovieAdapter()
         homeViewModel.getMovies().observe(viewLifecycleOwner, {
-            adapter.setMovie(it)
+            adapter?.setMovie(it)
         })
-        adapter.notifyDataSetChanged()
+        adapter?.notifyDataSetChanged()
 
-        binding.rvMovieList.adapter = adapter
+        binding?.rvMovieList?.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+        adapter = null
     }
 }

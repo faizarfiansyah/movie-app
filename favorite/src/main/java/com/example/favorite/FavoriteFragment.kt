@@ -17,9 +17,9 @@ import org.koin.core.context.loadKoinModules
 
 class FavoriteFragment : Fragment() {
 
-    lateinit var binding: FragmentFavoriteBinding
+    private var binding: FragmentFavoriteBinding? = null
     private val favoriteViewModel : FavoriteViewModel by viewModel()
-    private lateinit var adapter: MovieAdapter
+    private var adapter: MovieAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,7 +34,7 @@ class FavoriteFragment : Fragment() {
         binding = FragmentFavoriteBinding.bind(view)
 
         showRecycleView()
-        adapter.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
+        adapter?.setOnItemClickCallback(object : MovieAdapter.OnItemClickCallback{
             override fun onItemClicked(data: Int) {
                 val bundle = Bundle()
                 bundle.putInt(HomeFragment.EXTRA_MOVIE, data)
@@ -45,16 +45,23 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun showRecycleView() {
-        binding.rvFavoriteList.layoutManager = LinearLayoutManager(activity)
-        binding.rvFavoriteList.setHasFixedSize(true)
+        binding?.rvFavoriteList?.layoutManager = LinearLayoutManager(activity)
+        binding?.rvFavoriteList?.setHasFixedSize(true)
 
         adapter = MovieAdapter()
-        favoriteViewModel.getFavoriteMovies().observe(viewLifecycleOwner,{
-            adapter.setMovie(it)
-        })
-        adapter.notifyDataSetChanged()
 
-        binding.rvFavoriteList.adapter = adapter
+        favoriteViewModel.getFavoriteMovies().observe(viewLifecycleOwner,{
+            adapter?.setMovie(it)
+        })
+        adapter?.notifyDataSetChanged()
+
+        binding?.rvFavoriteList?.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+        adapter = null
     }
 
 }

@@ -48,7 +48,7 @@ class MovieRepository (
 
     override suspend fun deleteFavorite(movie: Movie) {
         val entity = DataMapper.mapDomainObjectToEntity(movie)
-        localDataSource.deleteFavortie(entity)
+        localDataSource.deleteFavorite(entity)
     }
 
 

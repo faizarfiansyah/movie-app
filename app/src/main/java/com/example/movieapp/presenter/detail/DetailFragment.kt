@@ -24,7 +24,7 @@ import java.util.*
 
 class DetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentDetailBinding
+    private var binding: FragmentDetailBinding? = null
 
     private val detailViewModel : DetailViewModel by viewModel()
 
@@ -53,22 +53,22 @@ class DetailFragment : Fragment() {
             val count = detailViewModel.getFavoriteCount(movie.id)
             withContext(Dispatchers.Main){
                 bool = if(count > 0){
-                    binding.floatingActionButton2.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
+                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
                     true
                 }else{
-                    binding.floatingActionButton2.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
+                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
                     false
                 }
             }
 
-            binding.floatingActionButton2.setOnClickListener {
+            binding?.floatingActionButton2?.setOnClickListener {
                 bool = !bool
                 if(bool){
                     detailViewModel.addFavorite(movie)
-                    binding.floatingActionButton2.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
+                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
                 }else{
                     detailViewModel.removeFavorite(movie)
-                    binding.floatingActionButton2.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
+                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
                 }
             }
         }
@@ -80,26 +80,26 @@ class DetailFragment : Fragment() {
             checkMovie(DataMapper.mapDetailToMovie(it, movieId))
             val poster = it.poster_path ?: ""
             if(poster == ""){
-                Glide.with(binding.root)
+                Glide.with(binding!!.root)
                     .load(R.drawable.no_preview)
                     .fitCenter()
-                    .into(binding.movieImage)
+                    .into(binding!!.movieImage)
             }else{
-                Glide.with(binding.root)
+                Glide.with(binding!!.root)
                     .load("https://image.tmdb.org/t/p/w500${it.poster_path}")
                     .centerCrop()
-                    .into(binding.movieImage)
+                    .into(binding!!.movieImage)
             }
 
-            binding.tvReleaseDate.text = formatMoney(it.revenue)
-            binding.tvCountry.text = it.release_date
-            binding.tvDirected.text = formatMoney(it.budget)
-            binding.tvLanguage.text = it.original_language
-            binding.tvImdbRating.text = it.vote_average.toString()
-            binding.tvRtRating.text = it.vote_count.toString()
-            binding.tvMovieTitle.text = it.title
-            binding.tvMovieSynopsis.text = it.overview
-            binding.tvDuration.text = getString(R.string.minutes, it.runtime)
+            binding?.tvReleaseDate?.text = formatMoney(it.revenue)
+            binding?.tvCountry?.text = it.release_date
+            binding?.tvDirected?.text = formatMoney(it.budget)
+            binding?.tvLanguage?.text = it.original_language
+            binding?.tvImdbRating?.text = it.vote_average.toString()
+            binding?.tvRtRating?.text = it.vote_count.toString()
+            binding?.tvMovieTitle?.text = it.title
+            binding?.tvMovieSynopsis?.text = it.overview
+            binding?.tvDuration?.text = getString(R.string.minutes, it.runtime)
         })
     }
 
@@ -109,5 +109,10 @@ class DetailFragment : Fragment() {
         format.currency = Currency.getInstance("USD")
 
         return format.format(value)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

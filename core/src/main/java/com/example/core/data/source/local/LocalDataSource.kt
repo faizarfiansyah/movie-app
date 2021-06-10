@@ -12,6 +12,6 @@ class LocalDataSource (private val movieDao: MovieDao) {
 
     suspend fun addFavorite(movie: MovieEntity) = movieDao.addFavorite(movie)
 
-    suspend fun deleteFavortie(movie: MovieEntity) = movieDao.deleteFavorite(movie)
+    suspend fun deleteFavorite(movie: MovieEntity) = movieDao.deleteFavorite(movie)
 
 }

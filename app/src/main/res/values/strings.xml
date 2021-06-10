@@ -13,11 +13,8 @@
     <string name="synopsis">Synopsis</string>
     <string name="minutes">%1$d minutes</string>
     <string name="favorite">Favorite</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="top_movies">Top Movies</string>
     <string name="favorite_movies">Favorite Movies</string>
     <string name="title_favorite">Favorite</string>
     <string name="search">Search Movie</string>
-    <string name="title_search">Search</string>
 </resources>
