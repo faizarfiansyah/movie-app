@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Expert Capstone</string>
+    <string name="movie_poster">Movie Poster</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="movie_overview">Movie Overview</string>
+    <string name="budget">Budget</string>
+    <string name="revenue">Revenue</string>
+    <string name="release_date">Release Date</string>
+    <string name="language">Language</string>
+    <string name="duration">Duration</string>
+    <string name="rating_score">Rating Score</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="minutes">%1$d minutes</string>
+    <string name="favorite">Favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="top_movies">Top Movies</string>
+    <string name="favorite_movies">Favorite Movies</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="search">Search Movie</string>
+    <string name="title_search">Search</string>
+</resources>
