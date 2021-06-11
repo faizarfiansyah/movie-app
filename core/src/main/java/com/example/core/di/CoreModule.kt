@@ -9,6 +9,8 @@ import com.example.core.data.source.remote.RemoteDataSource
 import com.example.core.data.source.remote.api.API
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
+import okhttp3.CertificatePinner
+import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -31,8 +33,16 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
+        val httpBuilder = OkHttpClient.Builder()
+        val certificatePinner = CertificatePinner.Builder()
+            .add("api.themoviedb.org", "sha256/JSMzqOOrtyOT1kmau6zKhgT676hGgczD5VMdRMyJZFA=")
+            .build()
+        val client1 = httpBuilder
+            .certificatePinner(certificatePinner)
+            .build()
         val baseUrl = "https://api.themoviedb.org/3/"
         val retrofit: Retrofit = Retrofit.Builder()
+            .client(client1)
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

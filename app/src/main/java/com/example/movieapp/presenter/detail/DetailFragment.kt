@@ -53,22 +53,22 @@ class DetailFragment : Fragment() {
             val count = detailViewModel.getFavoriteCount(movie.id)
             withContext(Dispatchers.Main){
                 bool = if(count > 0){
-                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
+                    binding?.floatingButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
                     true
                 }else{
-                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
+                    binding?.floatingButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
                     false
                 }
             }
 
-            binding?.floatingActionButton2?.setOnClickListener {
+            binding?.floatingButton2?.setOnClickListener {
                 bool = !bool
                 if(bool){
                     detailViewModel.addFavorite(movie)
-                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
+                    binding?.floatingButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_red))
                 }else{
                     detailViewModel.removeFavorite(movie)
-                    binding?.floatingActionButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
+                    binding?.floatingButton2?.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_baseline_favorite_24_white))
                 }
             }
         }
@@ -91,14 +91,14 @@ class DetailFragment : Fragment() {
                     .into(binding!!.movieImage)
             }
 
-            binding?.tvReleaseDate?.text = formatMoney(it.revenue)
-            binding?.tvCountry?.text = it.release_date
-            binding?.tvDirected?.text = formatMoney(it.budget)
+            binding?.tvRevenue?.text = formatMoney(it.revenue)
+            binding?.tvReleaseDate?.text = it.release_date
+            binding?.tvBudget?.text = formatMoney(it.budget)
             binding?.tvLanguage?.text = it.original_language
             binding?.tvImdbRating?.text = it.vote_average.toString()
-            binding?.tvRtRating?.text = it.vote_count.toString()
+            binding?.tvVoteCount?.text = it.vote_count.toString()
             binding?.tvMovieTitle?.text = it.title
-            binding?.tvMovieSynopsis?.text = it.overview
+            binding?.tvSynopsis?.text = it.overview
             binding?.tvDuration?.text = getString(R.string.minutes, it.runtime)
         })
     }

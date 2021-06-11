@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presenter.detail.DetailFragment"
-    android:id="@+id/movie_detail_fragment">
+    tools:context=".presenter.detail.DetailFragment">
 
     <ProgressBar
-        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +17,7 @@
         android:visibility="gone"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/floatingButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -76,9 +74,8 @@
                 style="@style/TextSpec.Field"
                 android:text="@string/budget" />
 
-            <TextView
-                android:id="@+id/tv_directed"
-                style="@style/TextSpec.Value" />
+            <TextView style="@style/TextSpec.Value"
+                android:id="@+id/tv_budget"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -89,9 +86,8 @@
                 style="@style/TextSpec.Field"
                 android:text="@string/revenue" />
 
-            <TextView
-                android:id="@+id/tv_release_date"
-                style="@style/TextSpec.Value" />
+            <TextView style="@style/TextSpec.Value"
+                android:id="@+id/tv_revenue"/>
         </TableRow>
 
         <TableRow
@@ -103,9 +99,8 @@
                 style="@style/TextSpec.Field"
                 android:text="@string/release_date" />
 
-            <TextView
-                android:id="@+id/tv_country"
-                style="@style/TextSpec.Value" />
+            <TextView style="@style/TextSpec.Value"
+                android:id="@+id/tv_release_date"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -116,9 +111,8 @@
                 style="@style/TextSpec.Field"
                 android:text="@string/language" />
 
-            <TextView
-                android:id="@+id/tv_Language"
-                style="@style/TextSpec.Value"/>
+            <TextView style="@style/TextSpec.Value"
+                android:id="@+id/tv_language"/>
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -129,9 +123,8 @@
                 style="@style/TextSpec.Field"
                 android:text="@string/duration" />
 
-            <TextView
-                android:id="@+id/tv_duration"
-                style="@style/TextSpec.Value" />
+            <TextView style="@style/TextSpec.Value"
+                android:id="@+id/tv_duration"/>
         </TableRow>
 
 
@@ -171,7 +164,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/tv_rt_rating"
+        android:id="@+id/tv_vote_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
@@ -191,7 +184,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_imdb_rating" />
 
     <TextView
-        android:id="@+id/tv_movie_synopsis"
+        android:id="@+id/tv_synopsis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
